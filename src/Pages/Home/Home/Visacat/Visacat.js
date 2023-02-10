@@ -1,16 +1,19 @@
-import { Card } from 'flowbite-react';
+import { Card, Rating } from 'flowbite-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 
 const Visacat = ({ vservice }) => {
     const { title, img, _id, Details, price } = vservice
     return (
         <div className="max-w-sm">
-            <Card
-                imgAlt="Apple Watch Series 7 in colors pink, silver, and black"
-                imgSrc={img}
-            >
-
+            <Card>
+                <PhotoProvider>
+                    <PhotoView src={img}>
+                        <img src={img} alt="" />
+                    </PhotoView>
+                </PhotoProvider>
                 <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                     <Link to="/">
                         {title}
@@ -19,7 +22,7 @@ const Visacat = ({ vservice }) => {
                 <p className="font-normal text-gray-700 dark:text-gray-400">
                     {Details}
                 </p>
-                <div className="mt-2.5 mb-5 flex items-center">
+                {/* <div className="mt-2.5 mb-5 flex items-center">
                     <svg
                         className="h-5 w-5 text-yellow-300"
                         fill="currentColor"
@@ -63,7 +66,14 @@ const Visacat = ({ vservice }) => {
                     <span className="mr-2 ml-3 rounded bg-blue-100 px-2.5 py-0.5 text-xs font-semibold text-blue-800 dark:bg-blue-200 dark:text-blue-800">
                         5.0
                     </span>
-                </div>
+                </div> */}
+                <Rating size="md">
+                    <Rating.Star />
+                    <Rating.Star />
+                    <Rating.Star />
+                    <Rating.Star />
+                    <Rating.Star filled={false} />
+                </Rating>
                 <div className="flex items-center justify-between">
                     <span className="text-3xl font-bold text-gray-900 dark:text-white">
                         ${price}
@@ -76,7 +86,7 @@ const Visacat = ({ vservice }) => {
                     </Link>
                 </div>
             </Card>
-        </div>
+        </div >
     );
 };
 

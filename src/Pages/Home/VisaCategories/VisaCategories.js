@@ -4,7 +4,7 @@ import Visacat from '../Home/Visacat/Visacat';
 const VisaCategories = () => {
     const [vservices, setVservices] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/visaCategories`)
+        fetch(`http://localhost:5000/visacategories`)
             .then(res => res.json())
             .then(data => setVservices(data))
     }, [])
