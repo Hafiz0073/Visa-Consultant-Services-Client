@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
 const Reviews = ({ review, handleDelete }) => {
-    const { name, _id, message, categories } = review
-    const [visa, setVisa] = useState({})
+    const { name, _id, message, categories, email } = review
+    const [visa, setVisa] = useState(false)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/visacategories/${categories}`)
+        fetch(`http://localhost:5000/visacategories/${_id}`)
             .then(res => res.json())
             .then(data => setVisa(data))
-    }, [categories])
+    }, [_id])
 
     return (
         <div className="container flex flex-col w-full max-w-lg p-6 mx-auto divide-y rounded-md divide-gray-700 dark:bg-gray-900 dark:text-gray-100">

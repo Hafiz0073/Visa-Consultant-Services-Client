@@ -1,63 +1,57 @@
 import { Carousel } from 'flowbite-react';
 import React from 'react';
 
+import img1 from '../../../Assets/mainslide/banner-1.jpg';
+import img2 from '../../../Assets/mainslide/banner-2.jpg';
+import img3 from '../../../Assets/mainslide/banner-3-1024x458.jpg';
+import img4 from '../../../Assets/mainslide/banner-4-1024x452.jpg';
+import img5 from '../../../Assets/mainslide/banner-5-1024x452.jpg';
+
 const Slide = () => {
 
-    // const bannerData = [
-    //     {
-    //         image: img1,
-    //         prev: 5,
-    //         id: 1,
-    //         next: 2
-    //     },
-    //     {
-    //         image: img2,
-    //         prev: 1,
-    //         id: 2,
-    //         next: 3
-    //     },
-    //     {
-    //         image: img3,
-    //         prev: 2,
-    //         id: 3,
-    //         next: 4
-    //     },
-    //     {
-    //         image: img4,
-    //         prev: 3,
-    //         id: 4,
-    //         next: 5
-    //     },
-    //     {
-    //         image: img5,
-    //         prev: 4,
-    //         id: 5,
-    //         next: 1
-    //     }
-    // ]
+    const mainSlide = [
+        {
+            image: img1,
+            prev: 5,
+            id: 1,
+            next: 2
+        },
+        {
+            image: img2,
+            prev: 1,
+            id: 2,
+            next: 3
+        },
+        {
+            image: img3,
+            prev: 2,
+            id: 3,
+            next: 4
+        },
+        {
+            image: img4,
+            prev: 3,
+            id: 4,
+            next: 5
+        },
+        {
+            image: img5,
+            prev: 4,
+            id: 5,
+            next: 1
+        }
+    ]
     return (
-        <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
+        <div className="h-56 sm:h-64 xl:h-96 2xl:h-full">
             <Carousel slideInterval={5000}>
-                <img
-                    src="https://fastwpdemo.com/newwp/immigo/wp-content/uploads/2022/02/visa-3.jpg"
-                    alt="..."
-                />
-                <img
-                    src="https://flowbite.com/docs/images/carousel/carousel-2.svg"
-                    alt="..."
-                />
-                <img
-                    src="https://flowbite.com/docs/images/carousel/carousel-3.svg"
-                    alt="..."
-                />
-                <img
-                    src="https://flowbite.com/docs/images/carousel/carousel-4.svg"
-                    alt="..."
-                />
-                <img
-                    src="https://flowbite.com/docs/images/carousel/carousel-5.svg"
-                    alt="..."
-                />
+                {
+                    mainSlide.map(mslide => <div>
+
+                        key={mslide.id}
+                        <img src={mslide.image} alt="" />
+                    </div>)
+                }
+
             </Carousel>
         </div>
     );

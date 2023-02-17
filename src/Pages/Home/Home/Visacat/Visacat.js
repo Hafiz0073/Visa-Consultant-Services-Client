@@ -11,7 +11,7 @@ const Visacat = ({ vservice }) => {
             <Card>
                 <PhotoProvider>
                     <PhotoView src={img}>
-                        <img src={img} alt="" />
+                        <img src={img} className="object-cover object-center w-full h-72 dark:bg-gray-500" alt="" />
                     </PhotoView>
                 </PhotoProvider>
                 <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
@@ -19,9 +19,15 @@ const Visacat = ({ vservice }) => {
                         {title}
                     </Link>
                 </h5>
-                <p className="font-normal text-gray-700 dark:text-gray-400">
-                    {Details}
-                </p>
+                <>
+                    <p className="font-normal text-gray-700 dark:text-gray-400">
+                        {
+                            Details.length > 100 ?
+                                <p>{Details.slice(0, 100) + '...'}</p>
+                                :
+                                <p>{Details}</p>}
+                    </p>
+                </>
                 {/* <div className="mt-2.5 mb-5 flex items-center">
                     <svg
                         className="h-5 w-5 text-yellow-300"
