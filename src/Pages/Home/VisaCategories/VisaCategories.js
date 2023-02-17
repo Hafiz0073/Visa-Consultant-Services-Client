@@ -1,4 +1,6 @@
+import { Button } from 'flowbite-react';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Visacat from '../Home/Visacat/Visacat';
 
 const VisaCategories = () => {
@@ -20,6 +22,19 @@ const VisaCategories = () => {
                     key={vservice._id}
                     vservice={vservice}
                 ></Visacat>)}
+            </div>
+            <div className="container py-10 px-10 mx-0 min-w-full flex flex-col items-center  ">
+
+                <Button className='hover:text-gray-50'
+                    outline={true}
+                    gradientDuoTone="purpleToBlue"
+
+                > <Link to="/visacategories">
+                        See All
+                    </Link>
+
+                </Button>
+
             </div>
         </div>
     );
