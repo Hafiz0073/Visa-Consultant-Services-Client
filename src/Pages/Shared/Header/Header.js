@@ -45,7 +45,7 @@ const Header = () => {
                         {
                             user?.email ?
                                 <>
-                                    <Link to='/reviews'>My Reviews</Link>
+                                    <Link to='/myreviews'>My Reviews</Link>
                                     <Button onClick={handleLogout} gradientMonochrome="info">
 
                                         logOut
@@ -67,7 +67,7 @@ const Header = () => {
                                 >
                                     <Dropdown.Header>
                                         <span className="block text-sm">
-                                            {user.displayName}
+                                            {user.displayName || user.name}
                                         </span>
                                         <span className="block truncate text-sm font-medium">
                                             {user.email}

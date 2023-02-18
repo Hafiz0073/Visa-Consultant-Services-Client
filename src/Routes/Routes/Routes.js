@@ -7,6 +7,7 @@ import VisaDetailsReview from "../../Pages/Home/VisaDetails/VisaDetails";
 import Login from "../../Pages/Login/Login";
 import ReviewsCollection from "../../Pages/ReviewsCollection/ReviewsCollection";
 import Signup from "../../Pages/Signup/Signup";
+import VisaCategoriesAll from "../../Pages/VisaCategoriesall/VisaCategoriesAll";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/visacategories',
-                element: <VisaCategories></VisaCategories>,
+                element: <VisaCategoriesAll></VisaCategoriesAll>
             },
             {
                 path: '/visadetails/:id',

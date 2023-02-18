@@ -1,14 +1,15 @@
+import { Unsubscribe } from '@mui/icons-material';
 import React, { useContext, useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { AuthCOntext } from '../../../Contexts/AuthProvider/AuthProvider';
 import Reviews from '../../Reviews/Reviews';
 
 const VisaDetails = () => {
-    const { _id, title } = useLoaderData()
+    const { _id, title, name, Details, img, price } = useLoaderData()
     const { user } = useContext(AuthCOntext)
-    const [reviews, setReviews] = useState([])
+    const [reviews, setReviews] = useState([false])
     useEffect(() => {
-        fetch(`http://localhost:5000/reviews?categories=${_id}`)
+        fetch(`http://localhost:5000/catreviews?categories=${_id}`)
             .then(res => res.json())
             .then(data => setReviews(data))
     }, [_id])
@@ -16,8 +17,10 @@ const VisaDetails = () => {
         event.preventDefault();
         const form = event.target;
         const name = form.username.value;
-        const email = user?.email || 'unregisterd'
+        const email = user?.email
         const message = form.message.value;
+
+
 
         const review = {
             categories: _id,
@@ -32,6 +35,7 @@ const VisaDetails = () => {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(review)
+
         })
             .then(res => res.json())
             .then(data => {
@@ -40,11 +44,29 @@ const VisaDetails = () => {
                     alert('review added successfully')
                     form.reset()
                 }
+
             })
             .catch(err => console.error(err))
     }
     return (
         <div>
+            <div>{
+                <section className="p-4 lg:p-8 dark:bg-gray-800 dark:text-gray-100">
+                    <div className="container mx-auto space-y-12">
+
+                        <div className="flex flex-col overflow-hidden rounded-md shadow-sm lg:flex-row-reverse">
+                            <img src={img} alt="" className="h-80 dark:bg-gray-500 aspect-video" />
+                            <div className="flex flex-col justify-center flex-1 p-6 dark:bg-gray-900">
+
+                                <h3 className="text-3xl font-bold">{title}</h3>
+                                <p className="my-6 dark:text-gray-400">{Details}</p>
+                                <button type="button" className="self-start">{price}</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            }
+            </div>
             <div>
                 <form onSubmit={handleReviewsubmit}>
                     <h2>{title}</h2>
