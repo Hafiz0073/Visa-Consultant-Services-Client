@@ -1,15 +1,17 @@
 
 import React, { useEffect, useState } from 'react';
+import useTitle from '../../hooks/useTitle';
 
 const Myrevies = ({ review, handleDelete }) => {
     const { name, _id, message, categories, email } = review
-    const [visa, setVisa] = useState(true)
+    const [visa, setVisa] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/visacategories/${_id}`)
+        fetch(`https://hafiz-consultancy-server-hafiz0073.vercel.app/visacategories/${_id}`)
             .then(res => res.json())
             .then(data => setVisa(data))
-    }, [_id])
+    }, [_id,])
+
 
     return (
         <div className="container flex flex-col w-full max-w-lg p-6 mx-auto divide-y rounded-md divide-gray-700 dark:bg-gray-900 dark:text-gray-100">

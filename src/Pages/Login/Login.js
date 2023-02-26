@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthCOntext } from '../../Contexts/AuthProvider/AuthProvider';
+import useTitle from '../../hooks/useTitle';
 
 const Login = () => {
     const { signIn, googleSignIn } = useContext(AuthCOntext)
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
+    useTitle("login")
 
     const handleSubmit = event => {
         event.preventDefault()
@@ -18,8 +20,27 @@ const Login = () => {
         signIn(email, password)
             .then(result => {
                 const user = result.user;
-                console.log(user)
+                const currentuser = {
+                    email: user.email
+                }
+                console.log(currentuser)
                 form.reset()
+                //get jwt token
+                fetch('https://hafiz-consultancy-server-hafiz0073.vercel.app/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentuser)
+
+                })
+                    .then(res => res.json()
+                        .then(data => {
+                            console.log(data)
+                            //localStorage
+                            localStorage.setItem('genius-token', data.token)
+                        }))
+
                 navigate(from, { replace: true })
             })
             .catch(error => {
@@ -62,7 +83,7 @@ const Login = () => {
                             </label>
                             <input type="password" name="password" placeholder="password" className="input input-bordered" />
                             <label className="label">
-                                <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                                <Link to='/signup' className="label-text-alt link link-hover">Forgot password?</Link>
                             </label>
                         </div>
                         <div className="form-control mt-6">

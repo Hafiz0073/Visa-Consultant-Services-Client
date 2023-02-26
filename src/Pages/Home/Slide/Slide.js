@@ -45,9 +45,10 @@ const Slide = () => {
         <div className="h-56 sm:h-64 xl:h-96 2xl:h-full">
             <Carousel slideInterval={5000}>
                 {
-                    mainSlide.map(mslide => <div>
+                    mainSlide.map(mslide => <div
+                        key={mslide.id}>
 
-                        key={mslide.id}
+
                         <img src={mslide.image} alt="" />
                     </div>)
                 }

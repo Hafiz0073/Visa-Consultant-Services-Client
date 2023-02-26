@@ -1,19 +1,26 @@
-import React, { createContext, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthCOntext } from '../../Contexts/AuthProvider/AuthProvider';
 
 const Signup = () => {
     const { createUser } = useContext(AuthCOntext)
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+
     const handleSignup = event => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
+        form.reset()
+
 
         createUser(email, password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                navigate(from, { replace: true })
             })
             .catch(err => console.error(err))
     }
@@ -53,7 +60,7 @@ const Signup = () => {
 
                         </div>
                     </form>
-                    <p className='text-center'>Already Have an Account? Please  <Link to='/login' className='text-orange'>Login</Link></p>
+                    <p className='text-center'>Already Have an Account?  <Link to='/login' className='text-orange-400'>Please Login</Link></p>
                 </div>
             </div>
         </div>

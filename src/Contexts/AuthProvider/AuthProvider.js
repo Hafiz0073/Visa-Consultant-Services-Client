@@ -19,10 +19,11 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password)
     })
-    const logOut = ((uid) => {
+    const logOut = () => {
         setLoading(true);
-        return signOut(auth, uid)
-    })
+        localStorage.removeItem('genius-token')
+        return signOut(auth)
+    }
     const googleSignIn = () => {
         setLoading(true);
         return signInWithPopup(auth, googleProvider)

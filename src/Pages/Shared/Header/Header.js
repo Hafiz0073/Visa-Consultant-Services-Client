@@ -39,13 +39,14 @@ const Header = () => {
                         <Navbar.Link href="/visacategories">
                             Visa Categories
                         </Navbar.Link>
-                        <Navbar.Link href="/">
-                            Contact
+                        <Navbar.Link href="/blogs">
+                            Blogs
                         </Navbar.Link>
                         {
                             user?.email ?
                                 <>
                                     <Link to='/myreviews'>My Reviews</Link>
+                                    <Link to='/add-category'>Add Service</Link>
                                     <Button onClick={handleLogout} gradientMonochrome="info">
 
                                         logOut
@@ -57,17 +58,17 @@ const Header = () => {
                                     login</Button></Link>
                         }
 
-                        {user?.photoURL ?
+                        {user?.email ?
 
                             <div className="flex md:order-2">
                                 <Dropdown
                                     arrowIcon={false}
                                     inline={true}
-                                    label={<img className="w-10 rounded-full" src={user?.photoURL} alt="" rounded={true} />}
+                                    label={user.name}
                                 >
                                     <Dropdown.Header>
                                         <span className="block text-sm">
-                                            {user.displayName || user.name}
+                                            {user.displayName}
                                         </span>
                                         <span className="block truncate text-sm font-medium">
                                             {user.email}

@@ -1,29 +1,29 @@
-import { Unsubscribe } from '@mui/icons-material';
 import { Avatar } from 'flowbite-react';
 import React, { useContext, useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import { AuthCOntext } from '../../../Contexts/AuthProvider/AuthProvider';
-import Reviews from '../../Reviews/Reviews';
+import { toast } from 'react-toastify';
+import { AuthCOntext } from '../../Contexts/AuthProvider/AuthProvider';
 
-const VisaDetails = () => {
-    const { _id, title, name, Details, img, price } = useLoaderData().data
+const VIsaCatDetails = () => {
     const { user } = useContext(AuthCOntext)
-    const [reviews, setReviews] = useState([])
-    const [update, setUpdate] = useState(false)
+    const visaDetailsOne = useLoaderData().data;
+    const { title, price, Details, img, _id } = visaDetailsOne;
+    const { reviewsall, setReviewsall } = useState([])
+
     useEffect(() => {
         fetch(`https://hafiz-consultancy-server-hafiz0073.vercel.app/catreviews?categories=${_id}`)
             .then(res => res.json())
-            .then(data => setReviews(data))
-    }, [_id, update])
+            .then(data => {
+                setReviewsall(data)
+            })
+    }, [_id])
+
     const handleReviewsubmit = event => {
         event.preventDefault();
         const form = event.target;
         const name = form.username.value;
-        const email = user.email || 'Unregistered';
+        const email = user.email;
         const message = form.message.value;
-
-
 
         const review = {
             categories: _id,
@@ -32,29 +32,29 @@ const VisaDetails = () => {
             email,
             message
         }
-        fetch('https://hafiz-consultancy-server-hafiz0073.vercel.app/reviews', {
-            method: 'POST',
+        fetch("https://hafiz-consultancy-server-hafiz0073.vercel.app/reviews", {
+            method: "POST",
             headers: {
-                'content-type': 'application/json'
+                "content-type": "application/json"
             },
             body: JSON.stringify(review)
-
-        })
-            .then(res => res.json())
+        }).then(res => res.json())
             .then(data => {
                 console.log(data)
                 if (!user) {
-                    Swal.fire('please login')
+                    alert('please login')
                 }
                 if (data.acknowledged && user) {
-                    Swal.fire('review added successfully')
+                    alert('review added successfully')
                     form.reset()
                 }
-                setUpdate(!update)
+
 
             })
             .catch(err => console.error(err))
-    }
+
+    };
+
     return (
         <div>
             <div>{
@@ -88,11 +88,9 @@ const VisaDetails = () => {
 
                 {
 
-                    reviews.map(review => (<div className="container flex flex-col w-full max-w-lg p-6 mx-auto divide-y rounded-md divide-gray-700 dark:bg-gray-900 dark:text-gray-100"
+                    reviewsall.map(review => (<div className="container flex flex-col w-full max-w-lg p-6 mx-auto divide-y rounded-md divide-gray-700 dark:bg-gray-900 dark:text-gray-100"
                         key={review._id}
                     >
-
-
                         <div className="flex justify-between p-4">
                             <div className="flex space-x-4">
                                 <div>
@@ -127,4 +125,4 @@ const VisaDetails = () => {
     );
 };
 
-export default VisaDetails;
+export default VIsaCatDetails;
